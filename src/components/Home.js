@@ -25,7 +25,7 @@ export default function Home () {
             console.log('nao existe vai atualzar')
             addTask(task);
         }
-        setTask({});
+        setTask({task:'',date:'',id:null,done:false});
     }
 
     const doneTask = p => {
@@ -33,8 +33,13 @@ export default function Home () {
             ...p,
             done: !p.done
         }
-        //console.log("atualizando done de ", p, n);
         updateTask(n);
+    }
+
+    const change = (e, c) => {
+        let nt = {...task};
+        nt[c] = e.target.value;
+        setTask(nt);
     }
 
 
