@@ -6,8 +6,8 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MyNavBar from './components/MyNavBar';
 import Home from './components/Home'
-import About from './components/Home'
-import Dashboard from './components/Home'
+import About from './components/About'
+import Dashboard from './components/Dashboard'
 
 function App() {
   return (

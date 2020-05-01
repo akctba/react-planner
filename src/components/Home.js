@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { Formik } from 'formik';
-import * as yup from 'yup';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ListGroup from 'react-bootstrap/ListGroup'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckSquare, faTrashAlt, faPenSquare,  } from '@fortawesome/free-solid-svg-icons'
+import { faCheckSquare, faTrashAlt, faPenSquare } from '@fortawesome/free-solid-svg-icons'
 import {usePlanner} from '../context/PlannerContext'
 
 export default function Home () {
@@ -19,13 +18,14 @@ export default function Home () {
     const save = () => {
         console.log("vai salvar ", task);
         if(task.id) {
-            console.log('existe')
+            //console.log('existe')
             updateTask(task);
         } else {
-            console.log('nao existe vai atualzar')
+            //console.log('nao existe vai incluir')
             addTask(task);
         }
-        setTask({task:'',date:'',id:null,done:false});
+        //setTask({task:'',date:'',id:null,done:false});
+        setTask({});
     }
 
     const doneTask = p => {
@@ -66,11 +66,13 @@ export default function Home () {
                     <ListGroup>
                         {plan.map(p => {
                             return(
-                                <ListGroup.Item key={p.id} variant={p.done?"success":"warning"}>
-                                    {p.date} - {p.task} 
-                                    <Button variant="outline-danger" onClick={() => setTask(p)}><FontAwesomeIcon icon={faPenSquare} /></Button>
-                                    <Button variant="outline-success" onClick={() => doneTask(p)}><FontAwesomeIcon icon={faCheckSquare} /></Button>
-                                    <Button variant="outline-primary" onClick={() => deleteTask(p.id)}><FontAwesomeIcon icon={faTrashAlt} /></Button>
+                                <ListGroup.Item key={p.id} variant={p.done?"success":"warning"}  className="d-flex">
+                                    <div className="mr-auto">{p.date} - {p.task}</div>
+                                    <ButtonGroup>
+                                        <Button variant="outline-danger" onClick={() => setTask(p)}><FontAwesomeIcon icon={faPenSquare} /></Button>
+                                        <Button variant="outline-success" onClick={() => doneTask(p)}><FontAwesomeIcon icon={faCheckSquare} /></Button>
+                                        <Button variant="outline-primary" onClick={() => deleteTask(p.id)}><FontAwesomeIcon icon={faTrashAlt} /></Button>
+                                    </ButtonGroup>
                                 </ListGroup.Item>
                             );
                         })}
