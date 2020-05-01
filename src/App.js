@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import PlannerProvider from './context/PlannerContext';
 import Container from 'react-bootstrap/Container';
 import './App.css';
