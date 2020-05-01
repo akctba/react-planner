@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Formik } from 'formik';
+import * as yup from 'yup';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -35,14 +37,6 @@ export default function Home () {
         updateTask(n);
     }
 
-    const change = (e, c) => {
-        let n = {
-            ...task,
-            [c]: e.value
-        }
-        setTask(n);
-        console.log(e.currentTarget, c, task);
-    }
 
     return(
         <Container fluid>
