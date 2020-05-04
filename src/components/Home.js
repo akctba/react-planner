@@ -9,6 +9,7 @@ import ListGroup from 'react-bootstrap/ListGroup'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckSquare, faTrashAlt, faPenSquare } from '@fortawesome/free-solid-svg-icons'
 import {usePlanner} from '../context/PlannerContext'
+import Acumulation from './Acumulation';
 
 export default function Home () {
     const {plan, addTask, deleteTask, updateTask, getDays} = usePlanner();
@@ -49,22 +50,7 @@ export default function Home () {
     return(
         <Container fluid>
             <Row>
-                <Col lg="6" sm="12">
-                    <Form>
-                        <Form.Group controlId="task">
-                            <Form.Label>Task</Form.Label>
-                            <Form.Control type="text" placeholder="Enter task" value={task.task} onChange={e => change(e, 'task')} />
-                            <Form.Text className="text-muted">Id: {task.id}</Form.Text>
-                        </Form.Group>
-                        <Form.Group controlId="date">
-                            <Form.Label>Date</Form.Label>
-                            <Form.Control type="text" placeholder="yyyy-mm-dd" value={task.date} onChange={e => change(e, 'date')} />
-                        </Form.Group>
-                        <Button variant="primary" onClick={save}>save</Button>
-                        <Button variant="primary" onClick={cancel}>cancel</Button>
-                    </Form>
-                </Col>
-                <Col lg="6" sm="12">
+            <Col lg="6" sm="12">
                     {getDays().map(dt => {
                         return (
                             <div key={dt}>
@@ -88,6 +74,23 @@ export default function Home () {
                         );
                     })}
                 </Col>
+                <Col lg="6" sm="12">
+                    <Form>
+                        <Form.Group controlId="task">
+                            <Form.Label>Task</Form.Label>
+                            <Form.Control type="text" placeholder="Enter task" value={task.task} onChange={e => change(e, 'task')} />
+                            <Form.Text className="text-muted">Id: {task.id}</Form.Text>
+                        </Form.Group>
+                        <Form.Group controlId="date">
+                            <Form.Label>Date</Form.Label>
+                            <Form.Control type="text" placeholder="yyyy-mm-dd" value={task.date} onChange={e => change(e, 'date')} />
+                        </Form.Group>
+                        <Button variant="primary" onClick={save}>save</Button>
+                        <Button variant="primary" onClick={cancel} hidden={(!task.id)}>cancel</Button>
+                    </Form>
+                    <Acumulation />
+                </Col>
+                
             </Row>
         </Container>
     );
