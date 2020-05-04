@@ -11,12 +11,9 @@ function MyNavBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            {/* <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/about">About</Nav.Link>
-            <Nav.Link href="/dashboard">Dashboard</Nav.Link> */}
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/" className="nav-link">Home</Link>
+            <Link to="/about" className="nav-link">About</Link>
+            <Link to="/dashboard" className="nav-link">Dashboard</Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

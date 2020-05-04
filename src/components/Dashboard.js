@@ -11,16 +11,7 @@ export default function Dashboard () {
     const {plan} = usePlanner();
 
     const daysStatus = () => {
-        let data = 
-            [
-                {date:'2020-05-01', done:5, todo:3},
-                {date:'2020-05-02', done:3, todo:6},
-                {date:'2020-05-03', done:0, todo:8}
-            ];
-
-        // let days = plan.filter(
-        //     (thing, i, a) => a.findIndex(t => t.date === thing.date) === i
-        // ).map(a => a.date);
+        let data = [];
         
         let newdata = plan.reduce(
             (counter, item) => {

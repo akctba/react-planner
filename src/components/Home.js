@@ -11,12 +11,12 @@ import { faCheckSquare, faTrashAlt, faPenSquare } from '@fortawesome/free-solid-
 import {usePlanner} from '../context/PlannerContext'
 
 export default function Home () {
-    const {plan, addTask, deleteTask, updateTask} = usePlanner();
+    const {plan, addTask, deleteTask, updateTask, getDays} = usePlanner();
 
     const [task, setTask] = useState({});
 
     const save = () => {
-        console.log("vai salvar ", task);
+        //console.log("vai salvar ", task);
         if(task.id) {
             //console.log('existe')
             updateTask(task);
@@ -24,8 +24,8 @@ export default function Home () {
             //console.log('nao existe vai incluir')
             addTask(task);
         }
-        //setTask({task:'',date:'',id:null,done:false});
-        setTask({});
+        setTask({task:'',date:'',id:null,done:false});
+        //setTask({});
     }
 
     const doneTask = p => {
@@ -46,7 +46,7 @@ export default function Home () {
     return(
         <Container fluid>
             <Row>
-                <Col>
+                <Col lg="6" sm="12">
                     <Form>
                         <Form.Group controlId="task">
                             <Form.Label>Task</Form.Label>
@@ -62,22 +62,29 @@ export default function Home () {
                         </Button>
                     </Form>
                 </Col>
-                <Col>
-                    <ListGroup>
-                        {plan.map(p => {
-                            return(
-                                <ListGroup.Item key={p.id} variant={p.done?"success":"warning"}  className="d-flex">
-                                    <div className="mr-auto">{p.date} - {p.task}</div>
-                                    <ButtonGroup>
-                                        <Button variant="outline-danger" onClick={() => setTask(p)}><FontAwesomeIcon icon={faPenSquare} /></Button>
-                                        <Button variant="outline-success" onClick={() => doneTask(p)}><FontAwesomeIcon icon={faCheckSquare} /></Button>
-                                        <Button variant="outline-primary" onClick={() => deleteTask(p.id)}><FontAwesomeIcon icon={faTrashAlt} /></Button>
-                                    </ButtonGroup>
-                                </ListGroup.Item>
-                            );
-                        })}
-                        
-                    </ListGroup>
+                <Col lg="6" sm="12">
+                    {getDays().map(dt => {
+                        return (
+                            <div>
+                                <p>{dt}</p>
+                                <ListGroup>
+                                    {plan.map(p => { 
+                                        if (p.date === dt) {
+                                            return (<ListGroup.Item key={p.id} variant={p.done?"success":"warning"}  className="d-flex">
+                                                <div className="mr-auto">{p.date} - {p.task}</div>
+                                                <ButtonGroup>
+                                                    <Button variant="outline-danger" onClick={() => setTask(p)}><FontAwesomeIcon icon={faPenSquare} /></Button>
+                                                    <Button variant="outline-success" onClick={() => doneTask(p)}><FontAwesomeIcon icon={faCheckSquare} /></Button>
+                                                    <Button variant="outline-primary" onClick={() => deleteTask(p.id)}><FontAwesomeIcon icon={faTrashAlt} /></Button>
+                                                </ButtonGroup>
+                                            </ListGroup.Item>);
+                                        }
+                                        return null;
+                                    })}
+                                </ListGroup>
+                            </div>
+                        );
+                    })}
                 </Col>
             </Row>
         </Container>

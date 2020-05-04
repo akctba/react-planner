@@ -7,7 +7,7 @@ export default function About () {
     return(
         <Container>
             <Row>
-                <Col></Col>
+                <Col>About page...</Col>
             </Row>
         </Container>
     );
