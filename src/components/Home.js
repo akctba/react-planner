@@ -13,7 +13,7 @@ import {usePlanner} from '../context/PlannerContext'
 export default function Home () {
     const {plan, addTask, deleteTask, updateTask, getDays} = usePlanner();
 
-    const [task, setTask] = useState({});
+    const [task, setTask] = useState({task:'',date:'',id:null,done:false});
 
     const save = () => {
         //console.log("vai salvar ", task);
@@ -26,6 +26,10 @@ export default function Home () {
         }
         setTask({task:'',date:'',id:null,done:false});
         //setTask({});
+    }
+
+    const cancel = () => {
+        setTask({task:'',date:'',id:null,done:false});
     }
 
     const doneTask = p => {
@@ -42,7 +46,6 @@ export default function Home () {
         setTask(nt);
     }
 
-
     return(
         <Container fluid>
             <Row>
@@ -57,15 +60,14 @@ export default function Home () {
                             <Form.Label>Date</Form.Label>
                             <Form.Control type="text" placeholder="yyyy-mm-dd" value={task.date} onChange={e => change(e, 'date')} />
                         </Form.Group>
-                        <Button variant="primary" onClick={save}>
-                            save
-                        </Button>
+                        <Button variant="primary" onClick={save}>save</Button>
+                        <Button variant="primary" onClick={cancel}>cancel</Button>
                     </Form>
                 </Col>
                 <Col lg="6" sm="12">
                     {getDays().map(dt => {
                         return (
-                            <div>
+                            <div key={dt}>
                                 <p>{dt}</p>
                                 <ListGroup>
                                     {plan.map(p => { 
