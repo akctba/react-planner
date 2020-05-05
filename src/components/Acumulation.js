@@ -30,15 +30,18 @@ export default function Acumulation () {
     }
 
     return(
-        <BarChart data={daysStatus()} width={600} height={300}
+        <ResponsiveContainer width={'99%'} height={400}>
+            <BarChart data={daysStatus()} width={600} height={300}
                 margin={{top: 20, right: 30, left: 20, bottom: 5}}>
-        <CartesianGrid strokeDasharray="3 3"/>
-        <XAxis dataKey="date"/>
-        <YAxis/>
-        <Tooltip/>
-        <Legend />
-        <Bar dataKey="done" stackId="a" fill="#28a745" />
-        <Bar dataKey="todo" stackId="a" fill="#dc3545" />
-        </BarChart>
+                <CartesianGrid strokeDasharray="3 3"/>
+                <XAxis dataKey="date"/>
+                <YAxis/>
+                <Tooltip/>
+                <Legend />
+                <Bar dataKey="done" stackId="a" fill="#28a745" />
+                <Bar dataKey="todo" stackId="a" fill="#dc3545" />
+            </BarChart>
+        </ResponsiveContainer>
+        
     );
 }
